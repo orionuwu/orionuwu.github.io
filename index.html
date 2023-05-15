@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>3D Model Request</title>
+  <!-- Include EmailJS library -->
+  <script src="https://cdn.emailjs.com/dist/email.min.js"></script>
+  <script>
+    // Initialize EmailJS with your user ID
+    emailjs.init("U9zI1ePXYxKZGoWhc");
+
+    function sendEmail() {
+      var modelLinkInput = document.getElementById("modelLink");
+      var modelLink = modelLinkInput.value;
+
+      var senderEmailInput = document.getElementById("senderEmail");
+      var senderEmail = senderEmailInput.value;
+
+      var emailParams = {
+        to_email: "brandonwandrie@gmail.com",
+        from_email: senderEmail,
+        subject: "3D Model Request",
+        message: "Please 3D print the model at the following link: " + modelLink + "\n\nSender's Email: " + senderEmail
+      };
+
+      emailjs.send("service_yimantq", "template_3iuwiyq", emailParams)
+        .then(function(response) {
+          console.log("Email sent successfully", response);
+        }, function(error) {
+          console.error("Error sending email", error);
+        });
+    }
+  </script>
+</head>
+<body>
+  <h1>3D Model Request</h1>
+  <form id="modelForm">
+    <label for="modelLink">Link to 3D Model:</label>
+    <input type="text" name="modelLink" id="modelLink" placeholder="Enter the link to the 3D model" required>
+    <br>
+    <label for="senderEmail">Your Email:</label>
+    <input type="email" name="senderEmail" id="senderEmail" placeholder="Enter your email" required>
+    <br>
+    <input type="button" value="Submit" onclick="sendEmail()">
+  </form>
+</body>
+</html>
